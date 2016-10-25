@@ -5,6 +5,9 @@
  */
 package proyectoferreteria;
 
+import ferreteria.control.GestorPrincipal;
+import ferreteria.vista.Login;
+
 /**
  *
  * @author aleex
@@ -15,7 +18,12 @@ public class ProyectoFerreteria {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new ProyectoFerreteria().init();
+    }
+    private void init(){
+        GestorPrincipal gestor = new GestorPrincipal();
+        Login login = new Login(gestor);
+        login.init();
     }
     
 }
