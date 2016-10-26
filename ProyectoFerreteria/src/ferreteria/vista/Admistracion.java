@@ -5,6 +5,9 @@
  */
 package ferreteria.vista;
 
+import ferreteria.control.GestorPrincipal;
+import ferreteria.modelo.Modo;
+
 /**
  *
  * @author aleex
@@ -13,10 +16,66 @@ public class Admistracion extends javax.swing.JFrame {
 
     /**
      * Creates new form Adinistracion
+     *
+     * @param gestor
      */
-    public Admistracion() {
+    public Admistracion(GestorPrincipal gestor) {
+        super("Administración");
         initComponents();
+        modo = Modo.MODO_INICIO;
+        this.gestor = gestor;
+        config();
     }
+
+    private void config() {
+        setLocationRelativeTo(null);
+    }
+
+    public void init() {
+        setVisible(true);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Metodos"> 
+    public void activar() {
+        desActivarBotones();
+        btncancelar.setEnabled(true);
+        campoID.setEnabled(true);
+        campoNombre.setEnabled(true);
+        campoRol.setEnabled(true);
+        lbID.setEnabled(true);
+        lbNombre.setEnabled(true);
+        lbRol.setEnabled(true);
+        btnBuscar.setEnabled(true);
+    }
+
+    public void activarBotones() {
+        btncancelar.setEnabled(false);
+        btnConsultar.setEnabled(true);
+        btnBorrar.setEnabled(true);
+        btnModificar.setEnabled(true);
+        btnIncluir.setEnabled(true);
+    }
+
+    public void desActivarBotones() {
+        btncancelar.setEnabled(true);
+        btnConsultar.setEnabled(false);
+        btnBorrar.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnIncluir.setEnabled(false);
+    }
+
+    public void desactivar() {
+        activarBotones();
+        btncancelar.setEnabled(false);
+        campoID.setEnabled(false);
+        campoNombre.setEnabled(false);
+        campoRol.setEnabled(false);
+        lbID.setEnabled(false);
+        lbNombre.setEnabled(false);
+        lbRol.setEnabled(false);
+        btnBuscar.setEnabled(false);
+    }
+// </editor-fold> 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,8 +93,16 @@ public class Admistracion extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         btnConsultar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
-        bntModificar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
+        lbID = new javax.swing.JLabel();
+        campoID = new javax.swing.JTextField();
+        campoNombre = new javax.swing.JTextField();
+        campoRol = new javax.swing.JTextField();
+        lbNombre = new javax.swing.JLabel();
+        lbRol = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
+        btncancelar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -46,30 +113,13 @@ public class Admistracion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTabbedPane1.setMaximumSize(new java.awt.Dimension(600, 400));
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(600, 400));
+
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null}
@@ -99,7 +149,8 @@ public class Admistracion extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 281;
@@ -107,7 +158,7 @@ public class Admistracion extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 3, 0);
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 7, 4);
         jPanel2.add(jScrollPane1, gridBagConstraints);
 
         btnConsultar.setText("Consultar");
@@ -117,45 +168,144 @@ public class Admistracion extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 2);
+        gridBagConstraints.insets = new java.awt.Insets(14, 14, 4, 6);
         jPanel2.add(btnConsultar, gridBagConstraints);
 
         btnIncluir.setText("Incluir");
+        btnIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncluirActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 26;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(1, 10, 0, 2);
+        gridBagConstraints.insets = new java.awt.Insets(5, 14, 4, 6);
         jPanel2.add(btnIncluir, gridBagConstraints);
 
-        bntModificar.setText("Modificar");
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(1, 10, 0, 2);
-        jPanel2.add(bntModificar, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 14, 4, 6);
+        jPanel2.add(btnModificar, gridBagConstraints);
 
         btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 23;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 14, 4, 6);
+        jPanel2.add(btnBorrar, gridBagConstraints);
+
+        lbID.setText("ID");
+        lbID.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(lbID, gridBagConstraints);
+
+        campoID.setColumns(10);
+        campoID.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(campoID, gridBagConstraints);
+
+        campoNombre.setColumns(10);
+        campoNombre.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(campoNombre, gridBagConstraints);
+
+        campoRol.setColumns(10);
+        campoRol.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(campoRol, gridBagConstraints);
+
+        lbNombre.setText("Nombre");
+        lbNombre.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(lbNombre, gridBagConstraints);
+
+        lbRol.setText("Rol");
+        lbRol.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(lbRol, gridBagConstraints);
+
+        btnBuscar.setText("OK");
+        btnBuscar.setEnabled(false);
+        btnBuscar.setMaximumSize(new java.awt.Dimension(60, 29));
+        btnBuscar.setMinimumSize(new java.awt.Dimension(60, 29));
+        btnBuscar.setPreferredSize(new java.awt.Dimension(60, 29));
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 23;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(1, 10, 0, 2);
-        jPanel2.add(btnBorrar, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(btnBuscar, gridBagConstraints);
+
+        btncancelar.setText("Cancelar");
+        btncancelar.setEnabled(false);
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelarActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(btncancelar, gridBagConstraints);
 
         jTabbedPane1.addTab("Catalogo de Empleados", jPanel2);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
         jTabbedPane1.addTab("Catalogo de productos", jPanel1);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 7, 400, 270));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 7, 610, 470));
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -175,16 +325,48 @@ public class Admistracion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        // TODO add your handling code here:
+        activar();
+        modo = Modo.MODO_CONSULTA;
     }//GEN-LAST:event_btnConsultarActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
+        desactivar();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        activar();
+        modo = Modo.MODO_BORRAR;
+    }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        activar();
+        modo = Modo.MODO_MODIFICA;
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
+        activar();
+        modo = Modo.MODO_INCLUIR;
+    }//GEN-LAST:event_btnIncluirActionPerformed
+
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+        desactivar();
+    }//GEN-LAST:event_btncancelarActionPerformed
+
+    public Modo getModo() {
+        return modo;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntModificar;
     private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnIncluir;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btncancelar;
+    private javax.swing.JTextField campoID;
+    private javax.swing.JTextField campoNombre;
+    private javax.swing.JTextField campoRol;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -195,5 +377,11 @@ public class Admistracion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbID;
+    private javax.swing.JLabel lbNombre;
+    private javax.swing.JLabel lbRol;
     // End of variables declaration//GEN-END:variables
+    private Modo modo;
+    GestorPrincipal gestor;
+
 }

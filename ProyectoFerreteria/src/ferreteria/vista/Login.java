@@ -15,6 +15,7 @@ public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
+     * @param gestor
      */
     public Login(GestorPrincipal gestor) {
         this.gestor = gestor;
@@ -33,7 +34,6 @@ public class Login extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -53,7 +53,6 @@ public class Login extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(600, 400));
         setMinimumSize(new java.awt.Dimension(600, 400));
         setName("Inicio de sesión"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(600, 400));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
