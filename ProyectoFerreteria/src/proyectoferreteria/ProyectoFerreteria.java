@@ -1,4 +1,3 @@
-
 package proyectoferreteria;
 
 import ferreteria.control.GestorPrincipal;
@@ -11,30 +10,33 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-
 public class ProyectoFerreteria {
 
-   
     public static void main(String[] args) {
         new ProyectoFerreteria().init();
     }
-    private void init(){
+
+    private void init() {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        GestorPrincipal gestor = new GestorPrincipal();
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JFrame.setDefaultLookAndFeelDecorated(true);
+            GestorPrincipal gestor = new GestorPrincipal();
 //        Login login = new Login(gestor);
 //        login.init();
-        Admistracion ad= new Admistracion(gestor);
-        ad.init();
-        try {
-            Conexion cnx = Conexion.obtenerInstancia();
+            Admistracion ad = new Admistracion(gestor);
+            ad.init();
+            try {
+                Conexion cnx = Conexion.obtenerInstancia();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ProyectoFerreteria.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ProyectoFerreteria.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

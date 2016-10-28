@@ -7,6 +7,7 @@ package ferreteria.vista;
 
 import ferreteria.control.GestorPrincipal;
 import ferreteria.modelo.Modo;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -45,7 +46,7 @@ public class Admistracion extends javax.swing.JFrame {
         lbID.setEnabled(true);
         lbNombre.setEnabled(true);
         lbRol.setEnabled(true);
-        btnBuscar.setEnabled(true);
+        btnOK.setEnabled(true);
     }
 
     public void activarBotones() {
@@ -73,7 +74,7 @@ public class Admistracion extends javax.swing.JFrame {
         lbID.setEnabled(false);
         lbNombre.setEnabled(false);
         lbRol.setEnabled(false);
-        btnBuscar.setEnabled(false);
+        btnOK.setEnabled(false);
     }
 // </editor-fold> 
 
@@ -90,7 +91,7 @@ public class Admistracion extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaDatos = new javax.swing.JTable();
         btnConsultar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
@@ -101,7 +102,7 @@ public class Admistracion extends javax.swing.JFrame {
         campoRol = new javax.swing.JTextField();
         lbNombre = new javax.swing.JLabel();
         lbRol = new javax.swing.JLabel();
-        btnBuscar = new javax.swing.JButton();
+        btnOK = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -118,7 +119,7 @@ public class Admistracion extends javax.swing.JFrame {
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -143,9 +144,12 @@ public class Admistracion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getAccessibleContext().setAccessibleName("Hola\n");
+        tablaDatos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tablaDatos.setEnabled(false);
+        tablaDatos.setRowSelectionAllowed(false);
+        tablaDatos.setShowVerticalLines(false);
+        jScrollPane1.setViewportView(tablaDatos);
+        tablaDatos.getAccessibleContext().setAccessibleName("Hola\n");
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -270,14 +274,14 @@ public class Admistracion extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel2.add(lbRol, gridBagConstraints);
 
-        btnBuscar.setText("OK");
-        btnBuscar.setEnabled(false);
-        btnBuscar.setMaximumSize(new java.awt.Dimension(60, 29));
-        btnBuscar.setMinimumSize(new java.awt.Dimension(60, 29));
-        btnBuscar.setPreferredSize(new java.awt.Dimension(60, 29));
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnOK.setText("OK");
+        btnOK.setEnabled(false);
+        btnOK.setMaximumSize(new java.awt.Dimension(60, 29));
+        btnOK.setMinimumSize(new java.awt.Dimension(60, 29));
+        btnOK.setPreferredSize(new java.awt.Dimension(60, 29));
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+                btnOKActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -285,7 +289,7 @@ public class Admistracion extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(btnBuscar, gridBagConstraints);
+        jPanel2.add(btnOK, gridBagConstraints);
 
         btncancelar.setText("Cancelar");
         btncancelar.setEnabled(false);
@@ -329,10 +333,30 @@ public class Admistracion extends javax.swing.JFrame {
         modo = Modo.MODO_CONSULTA;
     }//GEN-LAST:event_btnConsultarActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
 
         desactivar();
-    }//GEN-LAST:event_btnBuscarActionPerformed
+        if (campoID.getText().isEmpty()
+                && campoNombre.getText().isEmpty()
+                && campoRol.getText().isEmpty()) {
+            Object[][] data = gestor.consultaDatos();
+            if (!data.equals(null)) {
+                tablaDatos.setModel(
+                        new DefaultTableModel(
+                                data, new String[]{"ID", "Nombre", "Rol"}));
+            }
+        }
+        if (campoID.getText().isEmpty()
+                && !campoNombre.getText().isEmpty()
+                && campoRol.getText().isEmpty()) {
+            Object[][] data = gestor.consultaDatos(campoNombre.getText());
+            if (!data.equals(null)) {
+                tablaDatos.setModel(
+                        new DefaultTableModel(
+                                data, new String[]{"ID", "Nombre", "Rol"}));
+            }
+        }
+    }//GEN-LAST:event_btnOKActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         activar();
@@ -359,10 +383,10 @@ public class Admistracion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnIncluir;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnOK;
     private javax.swing.JButton btncancelar;
     private javax.swing.JTextField campoID;
     private javax.swing.JTextField campoNombre;
@@ -376,10 +400,10 @@ public class Admistracion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbID;
     private javax.swing.JLabel lbNombre;
     private javax.swing.JLabel lbRol;
+    private javax.swing.JTable tablaDatos;
     // End of variables declaration//GEN-END:variables
     private Modo modo;
     GestorPrincipal gestor;

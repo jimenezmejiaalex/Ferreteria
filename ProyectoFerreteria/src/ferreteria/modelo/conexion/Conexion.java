@@ -22,7 +22,7 @@ public class Conexion {
                 + nombre, nombreUsuario, claveAcceso);
         return cnx;
     }
-
+    
     private static Connection Conexion;
     private String nombreUsuario = "root";
     private String nombre = "Ferreteria";
