@@ -92,6 +92,7 @@ public class GestorPrincipal {
         return data;
     }
     // </editor-fold>
+    
     private final String select = "SELECT `Empleado`.`idEmpleado`,\n"
             + "    `Empleado`.`nombreEmpleado`,\n"
             + "    `Empleado`.`clave`,\n"
