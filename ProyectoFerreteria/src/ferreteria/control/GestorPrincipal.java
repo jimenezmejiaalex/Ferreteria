@@ -60,7 +60,6 @@ public class GestorPrincipal {
         }
         return data;
     }
-
     public Object[][] consultaDatos(String nom) {
         Object[][] data = null;
         try {
@@ -89,6 +88,68 @@ public class GestorPrincipal {
         } catch (SQLException ex) {
             Logger.getLogger(GestorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return data;
+    }
+    public Object[][] consultaDatosID(String ID) {
+        Object[][] data = null;
+        try {
+            try (Connection c = cnx.obtenerConexion()) {
+                ps = c.prepareStatement(select);
+                rs = ps.executeQuery();
+                rsm = rs.getMetaData();
+                int i = 0;
+                int rows = 0;
+                while (rs.next()) {
+                    if (rs.getString(id).contains(ID)) {
+                        rows++;
+                    }
+                }
+                data = new String[rows][3];
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (rs.getString(id).contains(ID)) {
+                        data[i][0] = rs.getString(id);
+                        data[i][1] = rs.getString(nombreE);
+                        data[i][2] = rs.getString(rol);
+                        i++;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(data);
+        return data;
+    }
+    public Object[][] consultaDatosIDNom(String ID, String nom) {
+        Object[][] data = null;
+        try {
+            try (Connection c = cnx.obtenerConexion()) {
+                ps = c.prepareStatement(select);
+                rs = ps.executeQuery();
+                rsm = rs.getMetaData();
+                int i = 0;
+                int rows = 0;
+                while (rs.next()) {
+                    if (rs.getString(id).contains(ID) && rs.getString(nombreE).contains(nom)) {
+                        rows++;
+                    }
+                }
+                data = new String[rows][3];
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (rs.getString(id).contains(ID) && rs.getString(nombreE).contains(nom)) {
+                        data[i][0] = rs.getString(id);
+                        data[i][1] = rs.getString(nombreE);
+                        data[i][2] = rs.getString(rol);
+                        i++;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(data);
         return data;
     }
     // </editor-fold>

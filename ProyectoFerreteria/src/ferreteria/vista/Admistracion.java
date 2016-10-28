@@ -99,11 +99,11 @@ public class Admistracion extends javax.swing.JFrame {
         lbID = new javax.swing.JLabel();
         campoID = new javax.swing.JTextField();
         campoNombre = new javax.swing.JTextField();
-        campoRol = new javax.swing.JTextField();
         lbNombre = new javax.swing.JLabel();
         lbRol = new javax.swing.JLabel();
         btnOK = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
+        campoRol = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -248,16 +248,6 @@ public class Admistracion extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel2.add(campoNombre, gridBagConstraints);
 
-        campoRol.setColumns(10);
-        campoRol.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(campoRol, gridBagConstraints);
-
         lbNombre.setText("Nombre");
         lbNombre.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -304,6 +294,16 @@ public class Admistracion extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel2.add(btncancelar, gridBagConstraints);
 
+        campoRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Bodeguero", "Cajero", "Despachador", "Vendedor" }));
+        campoRol.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(campoRol, gridBagConstraints);
+
         jTabbedPane1.addTab("Catalogo de Empleados", jPanel2);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -331,29 +331,43 @@ public class Admistracion extends javax.swing.JFrame {
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         activar();
         modo = Modo.MODO_CONSULTA;
+        campoRol.setEnabled(false);
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-
+        System.out.println(String.valueOf(campoRol.getSelectedItem()));
         desactivar();
-        if (campoID.getText().isEmpty()
-                && campoNombre.getText().isEmpty()
-                && campoRol.getText().isEmpty()) {
-            Object[][] data = gestor.consultaDatos();
-            if (!data.equals(null)) {
-                tablaDatos.setModel(
-                        new DefaultTableModel(
-                                data, new String[]{"ID", "Nombre", "Rol"}));
+        if (modo == Modo.MODO_CONSULTA) {
+            if (campoID.getText().isEmpty()
+                    && campoNombre.getText().isEmpty()
+                    && String.valueOf(campoRol.getSelectedItem()).equals("Administrador")) {
+                Object[][] data = gestor.consultaDatos();
+                if (!data.equals(null)) {
+                    tablaDatos.setModel(
+                            new DefaultTableModel(
+                                    data, new String[]{"ID", "Nombre", "Rol"}));
+                }
             }
-        }
-        if (campoID.getText().isEmpty()
-                && !campoNombre.getText().isEmpty()
-                && campoRol.getText().isEmpty()) {
-            Object[][] data = gestor.consultaDatos(campoNombre.getText());
-            if (!data.equals(null)) {
-                tablaDatos.setModel(
-                        new DefaultTableModel(
-                                data, new String[]{"ID", "Nombre", "Rol"}));
+            if (!campoID.getText().isEmpty()
+                    && campoNombre.getText().isEmpty()
+                    && String.valueOf(campoRol.getSelectedItem()).equals("Administrador")) {
+                Object[][] data = gestor.consultaDatosID(campoID.getText());
+                System.out.println("Hola" + data);
+                if (!data.equals(null)) {
+                    tablaDatos.setModel(
+                            new DefaultTableModel(
+                                    data, new String[]{"ID", "Nombre", "Rol"}));
+                }
+            }
+            if (campoID.getText().isEmpty()
+                    && !campoNombre.getText().isEmpty()
+                    && String.valueOf(campoRol.getSelectedItem()).equals("Administrador")) {
+                Object[][] data = gestor.consultaDatos(campoNombre.getText());
+                if (!data.equals(null)) {
+                    tablaDatos.setModel(
+                            new DefaultTableModel(
+                                    data, new String[]{"ID", "Nombre", "Rol"}));
+                }
             }
         }
     }//GEN-LAST:event_btnOKActionPerformed
@@ -361,16 +375,19 @@ public class Admistracion extends javax.swing.JFrame {
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         activar();
         modo = Modo.MODO_BORRAR;
+        campoRol.setEnabled(false);
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         activar();
         modo = Modo.MODO_MODIFICA;
+        campoRol.setEnabled(true);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
         activar();
         modo = Modo.MODO_INCLUIR;
+        campoRol.setEnabled(true);
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
@@ -390,7 +407,7 @@ public class Admistracion extends javax.swing.JFrame {
     private javax.swing.JButton btncancelar;
     private javax.swing.JTextField campoID;
     private javax.swing.JTextField campoNombre;
-    private javax.swing.JTextField campoRol;
+    private javax.swing.JComboBox<String> campoRol;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
