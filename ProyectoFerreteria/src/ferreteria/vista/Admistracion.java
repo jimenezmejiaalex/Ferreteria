@@ -6,7 +6,9 @@
 package ferreteria.vista;
 
 import ferreteria.control.GestorPrincipal;
+import ferreteria.modelo.Empleado;
 import ferreteria.modelo.Modo;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -356,7 +358,7 @@ public class Admistracion extends javax.swing.JFrame {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         System.out.println(String.valueOf(campoRol.getSelectedItem()));
-        desactivar();
+        boolean vacios = algunCampoVacio();
         if (modo == Modo.MODO_CONSULTA) {
             if (campoID.getText().isEmpty()
                     && campoNombre.getText().isEmpty()
@@ -390,19 +392,28 @@ public class Admistracion extends javax.swing.JFrame {
                 }
             }
         }
-        if(modo == Modo.MODO_INCLUIR){
-            while(){}
+        if (modo == Modo.MODO_INCLUIR) {
+            if (algunCampoVacio()) {
+                JOptionPane.showMessageDialog(
+                        null, "Hay campos sin rellener",
+                        "Campos vacios !", JOptionPane.WARNING_MESSAGE);
+            } else {
+                gestor.agregarEmpleado(new Empleado(String.valueOf(campoRol.getSelectedItem()), String.valueOf(campoPassword.getPassword()), campoID.getText(), campoNombre.getText()));
+            }
         }
+        
+        desactivar();
     }//GEN-LAST:event_btnOKActionPerformed
 
-    private boolean algunCampoVacio(){
-        if(campoNombre.getText().isEmpty() 
+    private boolean algunCampoVacio() {
+        if (campoNombre.getText().isEmpty()
                 || campoID.getText().isEmpty()
-                   || String.valueOf(campoPassword.getPassword()).isEmpty())
+                || String.valueOf(campoPassword.getPassword()).isEmpty()) {
             return true;
+        }
         return false;
     }
-    
+
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         activar();
         modo = Modo.MODO_BORRAR;
