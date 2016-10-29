@@ -75,6 +75,8 @@ public class Admistracion extends javax.swing.JFrame {
         lbNombre.setEnabled(false);
         lbRol.setEnabled(false);
         btnOK.setEnabled(false);
+        campoPassword.setEnabled(false);
+        Clave.setEnabled(false);
     }
 // </editor-fold> 
 
@@ -104,6 +106,8 @@ public class Admistracion extends javax.swing.JFrame {
         btnOK = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
         campoRol = new javax.swing.JComboBox<>();
+        Clave = new javax.swing.JLabel();
+        campoPassword = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -153,7 +157,7 @@ public class Admistracion extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -276,7 +280,7 @@ public class Admistracion extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel2.add(btnOK, gridBagConstraints);
@@ -303,6 +307,22 @@ public class Admistracion extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel2.add(campoRol, gridBagConstraints);
+
+        Clave.setText("Clave");
+        Clave.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(Clave, gridBagConstraints);
+
+        campoPassword.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(campoPassword, gridBagConstraints);
 
         jTabbedPane1.addTab("Catalogo de Empleados", jPanel2);
 
@@ -341,7 +361,7 @@ public class Admistracion extends javax.swing.JFrame {
             if (campoID.getText().isEmpty()
                     && campoNombre.getText().isEmpty()
                     && String.valueOf(campoRol.getSelectedItem()).equals("Administrador")) {
-                Object[][] data = gestor.consultaDatos();
+                Object[][] data = gestor.consultaDatosEmpleado();
                 if (!data.equals(null)) {
                     tablaDatos.setModel(
                             new DefaultTableModel(
@@ -351,7 +371,7 @@ public class Admistracion extends javax.swing.JFrame {
             if (!campoID.getText().isEmpty()
                     && campoNombre.getText().isEmpty()
                     && String.valueOf(campoRol.getSelectedItem()).equals("Administrador")) {
-                Object[][] data = gestor.consultaDatosID(campoID.getText());
+                Object[][] data = gestor.consultaDatosIDEmpleado(campoID.getText());
                 System.out.println("Hola" + data);
                 if (!data.equals(null)) {
                     tablaDatos.setModel(
@@ -362,7 +382,7 @@ public class Admistracion extends javax.swing.JFrame {
             if (campoID.getText().isEmpty()
                     && !campoNombre.getText().isEmpty()
                     && String.valueOf(campoRol.getSelectedItem()).equals("Administrador")) {
-                Object[][] data = gestor.consultaDatos(campoNombre.getText());
+                Object[][] data = gestor.consultaDatosEmpleado(campoNombre.getText());
                 if (!data.equals(null)) {
                     tablaDatos.setModel(
                             new DefaultTableModel(
@@ -370,8 +390,19 @@ public class Admistracion extends javax.swing.JFrame {
                 }
             }
         }
+        if(modo == Modo.MODO_INCLUIR){
+            while(){}
+        }
     }//GEN-LAST:event_btnOKActionPerformed
 
+    private boolean algunCampoVacio(){
+        if(campoNombre.getText().isEmpty() 
+                || campoID.getText().isEmpty()
+                   || String.valueOf(campoPassword.getPassword()).isEmpty())
+            return true;
+        return false;
+    }
+    
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         activar();
         modo = Modo.MODO_BORRAR;
@@ -388,6 +419,8 @@ public class Admistracion extends javax.swing.JFrame {
         activar();
         modo = Modo.MODO_INCLUIR;
         campoRol.setEnabled(true);
+        campoPassword.setEnabled(true);
+        Clave.setEnabled(true);
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
@@ -399,6 +432,7 @@ public class Admistracion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Clave;
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnIncluir;
@@ -407,6 +441,7 @@ public class Admistracion extends javax.swing.JFrame {
     private javax.swing.JButton btncancelar;
     private javax.swing.JTextField campoID;
     private javax.swing.JTextField campoNombre;
+    private javax.swing.JPasswordField campoPassword;
     private javax.swing.JComboBox<String> campoRol;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
