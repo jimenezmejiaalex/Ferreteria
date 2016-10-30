@@ -54,8 +54,6 @@ public class Admistracion extends javax.swing.JFrame {
     public void activarBotones() {
         btncancelar.setEnabled(false);
         btnConsultar.setEnabled(true);
-        btnBorrar.setEnabled(true);
-        btnModificar.setEnabled(true);
         btnIncluir.setEnabled(true);
     }
 
@@ -199,6 +197,7 @@ public class Admistracion extends javax.swing.JFrame {
         jPanel2.add(btnIncluir, gridBagConstraints);
 
         btnModificar.setText("Modificar");
+        btnModificar.setEnabled(false);
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
@@ -213,6 +212,7 @@ public class Admistracion extends javax.swing.JFrame {
         jPanel2.add(btnModificar, gridBagConstraints);
 
         btnBorrar.setText("Borrar");
+        btnBorrar.setEnabled(false);
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarActionPerformed(evt);
@@ -357,13 +357,14 @@ public class Admistracion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        System.out.println(String.valueOf(campoRol.getSelectedItem()));
+
         boolean vacios = algunCampoVacio();
         if (modo == Modo.MODO_CONSULTA) {
+            // <editor-fold defaultstate="collapsed" desc="Consultar ">
             if (campoID.getText().isEmpty()
                     && campoNombre.getText().isEmpty()
                     && String.valueOf(campoRol.getSelectedItem()).equals("Administrador")) {
-                Object[][] data = gestor.consultaDatosEmpleado();
+                data = gestor.consultaDatosEmpleado();
                 if (!data.equals(null)) {
                     tablaDatos.setModel(
                             new DefaultTableModel(
@@ -373,7 +374,7 @@ public class Admistracion extends javax.swing.JFrame {
             if (!campoID.getText().isEmpty()
                     && campoNombre.getText().isEmpty()
                     && String.valueOf(campoRol.getSelectedItem()).equals("Administrador")) {
-                Object[][] data = gestor.consultaDatosIDEmpleado(campoID.getText());
+                data = gestor.consultaDatosIDEmpleado(campoID.getText());
                 System.out.println("Hola" + data);
                 if (!data.equals(null)) {
                     tablaDatos.setModel(
@@ -384,46 +385,96 @@ public class Admistracion extends javax.swing.JFrame {
             if (campoID.getText().isEmpty()
                     && !campoNombre.getText().isEmpty()
                     && String.valueOf(campoRol.getSelectedItem()).equals("Administrador")) {
-                Object[][] data = gestor.consultaDatosEmpleado(campoNombre.getText());
+                data = gestor.consultaDatosEmpleado(campoNombre.getText());
                 if (!data.equals(null)) {
                     tablaDatos.setModel(
                             new DefaultTableModel(
                                     data, new String[]{"ID", "Nombre", "Rol"}));
                 }
             }
+            if (!campoID.getText().isEmpty()
+                    && !campoNombre.getText().isEmpty()
+                    && String.valueOf(campoRol.getSelectedItem()).equals("Administrador")) {
+                data = gestor.consultaDatosIDNomEmpleado(campoID.getText(), campoNombre.getText());
+                if (!data.equals(null)) {
+                    tablaDatos.setModel(
+                            new DefaultTableModel(
+                                    data, new String[]{"ID", "Nombre", "Rol"}));
+                }
+            }
+            // </editor-fold>
         }
         if (modo == Modo.MODO_INCLUIR) {
+            // <editor-fold defaultstate="collapsed" desc="Incluir ">    
             if (algunCampoVacio()) {
                 JOptionPane.showMessageDialog(
                         null, "Hay campos sin rellener",
                         "Campos vacios !", JOptionPane.WARNING_MESSAGE);
+                return;
             } else {
                 gestor.agregarEmpleado(new Empleado(String.valueOf(campoRol.getSelectedItem()), String.valueOf(campoPassword.getPassword()), campoID.getText(), campoNombre.getText()));
+                limpiarCampos();
+                JOptionPane.showMessageDialog(null, "Datos ingresados correctamente", "Exito !", JOptionPane.INFORMATION_MESSAGE);
             }
+            //</editor-fold>    
         }
-        
+        if (modo == Modo.MODO_BORRAR) {
+            // <editor-fold defaultstate="collapsed" desc="Borrar ">
+            
+            //</editor-fold>
+        }
+        if (modo == Modo.MODO_MODIFICA) {
+            // <editor-fold defaultstate="collapsed" desc="Modifica ">
+            gestor.borrarEmpleado(String.valueOf(campoPassword.getPassword()),campoNombre.getText());
+            gestor.agregarEmpleado(new Empleado(
+                    String.valueOf(campoRol.getSelectedItem()),
+                    String.valueOf(campoPassword.getPassword()),
+                    campoID.getText(), campoNombre.getText()));
+            limpiarCampos();
+
+            //</editor-fold>
+        }
+        if (unaPersonaEncontrada() && modo == Modo.MODO_CONSULTA) {
+            btnModificar.setEnabled(true);
+            return;
+        }
         desactivar();
     }//GEN-LAST:event_btnOKActionPerformed
 
+    private void limpiarCampos() {
+        campoNombre.setText("");
+        campoID.setText("");
+        campoPassword.setText("");
+    }
+
+    private boolean unaPersonaEncontrada() {
+        return tablaDatos.getRowCount() == 1;
+    }
+
     private boolean algunCampoVacio() {
-        if (campoNombre.getText().isEmpty()
+        return campoNombre.getText().isEmpty()
                 || campoID.getText().isEmpty()
-                || String.valueOf(campoPassword.getPassword()).isEmpty()) {
-            return true;
-        }
-        return false;
+                || String.valueOf(campoPassword.getPassword()).isEmpty();
     }
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         activar();
         modo = Modo.MODO_BORRAR;
         campoRol.setEnabled(false);
+
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         activar();
         modo = Modo.MODO_MODIFICA;
+        campoPassword.setEnabled(true);
+        Clave.setEnabled(true);
         campoRol.setEnabled(true);
+        ID = String.valueOf(data[0][0]);
+        campoID.setText(String.valueOf(data[0][0]));
+        campoNombre.setText(String.valueOf(data[0][1]));
+        campoRol.setSelectedItem(String.valueOf(data[0][2]));
+        campoPassword.setText(String.valueOf(data[0][3]));
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
@@ -436,6 +487,8 @@ public class Admistracion extends javax.swing.JFrame {
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         desactivar();
+        btnModificar.setEnabled(false);
+        limpiarCampos();
     }//GEN-LAST:event_btncancelarActionPerformed
 
     public Modo getModo() {
@@ -468,7 +521,9 @@ public class Admistracion extends javax.swing.JFrame {
     private javax.swing.JLabel lbRol;
     private javax.swing.JTable tablaDatos;
     // End of variables declaration//GEN-END:variables
+    private String ID;
+    private Object[][] data;
     private Modo modo;
-    GestorPrincipal gestor;
+    private final GestorPrincipal gestor;
 
 }

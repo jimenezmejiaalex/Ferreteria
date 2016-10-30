@@ -48,10 +48,17 @@ public class GestorPrincipal {
         boolean resultado = false;
         try {
             resultado = gestorAdmi.agregarDatosEmpleado(emp);
-        } catch (SQLException ex) {
-           System.err.println(ex.getMessage());
+        } catch (SQLException e) {
+           System.err.println(e.getMessage());
         }
         return resultado;
+    }
+    public void borrarEmpleado(String password ,String nombre){
+        try {
+            gestorAdmi.borrarEmpleado(password, nombre);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
     // </editor-fold>
     private GestorAdministracion gestorAdmi;
