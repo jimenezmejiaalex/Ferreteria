@@ -179,29 +179,44 @@ public class GestorAdministracion {
         boolean exito;
         try (Connection c = cnx.obtenerConexion();
                 PreparedStatement stm = c.prepareStatement(borrar)) {
-
             stm.clearParameters();
-            stm.setString(1, password + "," + nombre);
-
+            stm.setString(1, password);
+            stm.setString(2, nombre);
             exito = (stm.executeUpdate() == 1);
         }
         return exito;
     }
-    public boolean actualizar(Empleado emp){
-        
-        return true;
+
+    public boolean actualizar(Empleado emp, String id, String nom) throws SQLException {
+        boolean exito;
+
+        try (Connection c = cnx.obtenerConexion()) {
+            System.out.println(emp + "\n" + id + "\n" + nom);
+            ps = c.prepareStatement(update);
+            ps.clearParameters();
+            ps.setString(1, emp.getID());
+            ps.setString(2, emp.getNombre());
+            ps.setString(3, emp.getClaveAcceso());
+            ps.setString(4, emp.getRoll());
+            ps.setString(5, id);
+            ps.setString(6, nom);
+            exito = (ps.executeUpdate() == 1);
+        }
+
+        return exito;
     }
     // </editor-fold>
 
     private static final String borrar
-            = "DELETE FROM `Empleado` WHERE idEmpleado=?,nombreEmpleado=?; ";
+            = "DELETE FROM `Ferreteria`.`Empleado`\n"
+            + "WHERE `idEmpleado` = ? AND `nombreEmpleado` = ?;";
 
     private static final String update = "UPDATE `Ferreteria`.`Empleado`\n"
             + "SET\n"
-            + "`idEmpleado` = <{idEmpleado: }>,\n"
-            + "`nombreEmpleado` = <{nombreEmpleado: }>,\n"
-            + "`clave` = <{clave: }>,\n"
-            + "`rollEmpleado` = <{rollEmpleado: }>\n"
+            + "`idEmpleado` = ?,\n"
+            + "`nombreEmpleado` = ?,\n"
+            + "`clave` = ?,\n"
+            + "`rollEmpleado` = ?\n"
             + "WHERE `idEmpleado` = ? AND `nombreEmpleado` = ?;";
 
     private final String select = "SELECT `Empleado`.`idEmpleado`,\n"
@@ -213,6 +228,11 @@ public class GestorAdministracion {
             = "INSERT INTO `Empleado` "
             + "(`idEmpleado`, `nombreEmpleado`, `clave`, `rollEmpleado`) "
             + "VALUES (?, ?, ?, ?); ";
+    private static final String CMD_ACTUALIZAR
+            = "UPDATE `eif206-bd01`.`persona` SET "
+            + "`apellido`=?, `nombre`=?, `enano`=? "
+            + "WHERE `id`=? ;";
+
     private final String id = "idEmpleado";
     private final String nombreE = "nombreEmpleado";
     private final String clave = "clave";

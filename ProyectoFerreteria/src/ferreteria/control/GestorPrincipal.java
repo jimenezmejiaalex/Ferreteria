@@ -3,6 +3,8 @@ package ferreteria.control;
 import ferreteria.modelo.Empleado;
 import ferreteria.modelo.conexion.Conexion;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GestorPrincipal {
 
@@ -59,6 +61,15 @@ public class GestorPrincipal {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+    }
+    public boolean actualizarEmpleado(Empleado emp, String id, String nom){
+        boolean result= false;
+        try {
+             result = gestorAdmi.actualizar(emp, id, nom);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
     }
     // </editor-fold>
     private GestorAdministracion gestorAdmi;
