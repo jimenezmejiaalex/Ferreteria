@@ -16,9 +16,10 @@ public class GestorPrincipal {
     public GestorPrincipal(Conexion cnx) {
         this.cnx = cnx;
         try {
+            gestorDespa= new GestorDespachador(); 
             gestorAdmi = new GestorAdministracion();
-        } catch (ClassNotFoundException ex) {
-            System.err.println(ex.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
         }
     }
     //</editor-fold>
@@ -125,6 +126,7 @@ public class GestorPrincipal {
     }
 
     // </editor-fold>
+    private GestorDespachador gestorDespa;
     private GestorAdministracion gestorAdmi;
     private Conexion cnx;
 }

@@ -18,7 +18,8 @@ public class Conexion {
     }
 
     public Connection obtenerConexion() throws SQLException {
-        Connection cnx = DriverManager.getConnection(protocolo + "://" + direccionIP + ":" + puerto + "/"
+        Connection cnx = DriverManager.getConnection(protocolo 
+                + "://" + direccionIP + ":" + puerto + "/"
                 + nombre, nombreUsuario, claveAcceso);
         return cnx;
     }

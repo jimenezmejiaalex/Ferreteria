@@ -1,22 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ferreteria.vista;
 
-/**
- *
- * @author aleex
- */
+import ferreteria.control.GestorPrincipal;
+import ferreteria.modelo.Modo;
+
 public class Despacho extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Despacho
-     */
-    public Despacho() {
+    public Despacho(GestorPrincipal gestor) {
+        super("Despacho");
         initComponents();
+        this.gestor = gestor;
+        modo = Modo.MODO_INICIO;
+        config();
     }
+
+    private void config() {
+        setLocationRelativeTo(null);
+    }
+
+    public void init() {
+        setVisible(true);
+    }
+
+    public void cambiarModo(Modo modo) {
+        if (modo == Modo.MODO_CONSULTA) {
+        }
+        if (modo == Modo.MODO_MODIFICA) {
+        }
+        if (modo == Modo.MODO_INICIO) {
+        }
+    }
+    public void actualizaLista(){}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,25 +39,105 @@ public class Despacho extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jPanel4 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        About = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+        getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_END);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane2.setViewportView(jList2);
+
+        jPanel2.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        jButton1.setText("Despachar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_END;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel4.add(jButton1, gridBagConstraints);
+
+        jButton2.setText("Eliminar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_END;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel4.add(jButton2, gridBagConstraints);
+
+        jPanel2.add(jPanel4, java.awt.BorderLayout.PAGE_START);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.LINE_START);
+
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane3.setViewportView(jTextArea1);
+
+        jPanel3.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+
+        jLabel1.setText("Factura");
+        jPanel3.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        About.setText("About");
+        jMenuBar1.add(About);
+
+        jMenu3.setText("Help");
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu About;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jList2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
+    private final GestorPrincipal gestor;
+    private Modo modo;
 }
