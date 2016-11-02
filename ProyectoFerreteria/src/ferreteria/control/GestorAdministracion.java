@@ -1,6 +1,7 @@
 package ferreteria.control;
 
 import ferreteria.modelo.Empleado;
+import ferreteria.modelo.Producto;
 import ferreteria.modelo.conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,6 +35,8 @@ public class GestorAdministracion {
 
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Methods">
+    
+        // <editor-fold defaultstate="collapsed" desc="Empleado">
     public Object[][] consultaDatos() {
         Object[][] data = null;
         try {
@@ -123,7 +126,6 @@ public class GestorAdministracion {
         } catch (SQLException ex) {
             Logger.getLogger(GestorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(data);
         return data;
     }
 
@@ -156,7 +158,6 @@ public class GestorAdministracion {
         } catch (SQLException ex) {
             Logger.getLogger(GestorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(data);
         return data;
     }
 
@@ -206,12 +207,179 @@ public class GestorAdministracion {
         return exito;
     }
     // </editor-fold>
+    
+        // <editor-fold defaultstate="collapsed" desc="Producto">
+        public boolean agregarDatosProducto(Producto pro) throws SQLException {
+        boolean exito = false;
+        try (Connection c = cnx.obtenerConexion()) {
+            ps = c.prepareStatement(agregarPro);
+            ps.clearParameters();
+            ps.setString(1, pro.getCodigo());
+            ps.setString(2, pro.getDecripcion());
+            ps.setString(3, pro.getUnidadMedida());
+            ps.setString(4, String.valueOf(pro.getPrecioUnitario()));
+            int r = ps.executeUpdate();
+            exito = (r == 1);
+        }
+        return exito;
+    }
+    public Object[][] consultaDatosPro() {
+        Object[][] data = null;
+        try {
+            try (Connection c = cnx.obtenerConexion()) {
+                ps = c.prepareStatement(selectPro);
+                rs = ps.executeQuery();
+                rsm = rs.getMetaData();
+                int i = 0;
+                int rows = 0;
+                while (rs.next()) {
+                    rows++;
+                }
+                data = new String[rows][4];
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    data[i][0] = rs.getString(codigo);
+                    data[i][1] = rs.getString(descripcion);
+                    data[i][2] = rs.getString(unidadMedida);
+                    data[i][3] = rs.getString(precioUnitario);
+                    i++;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+    public Object[][] consultaDatosPro(String cod) {
+        Object[][] data = null;
+        try {
+            try (Connection c = cnx.obtenerConexion()) {
+                ps = c.prepareStatement(selectPro);
+                rs = ps.executeQuery();
+                rsm = rs.getMetaData();
+                int i = 0;
+                int rows = 0;
+                while (rs.next()) {
+                    if (rs.getString(codigo).contains(cod)) {
+                        rows++;
+                    }
+                }
+                data = new String[rows][4];
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (rs.getString(codigo).contains(cod)) {
+                        data[i][0] = rs.getString(codigo);
+                        data[i][1] = rs.getString(descripcion);
+                        data[i][2] = rs.getString(unidadMedida);
+                        data[i][3] = rs.getString(precioUnitario);
+                        i++;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+    public Object[][] consultaDatosproDes(String des) {
+        Object[][] data = null;
+        try {
+            try (Connection c = cnx.obtenerConexion()) {
+                ps = c.prepareStatement(selectPro);
+                rs = ps.executeQuery();
+                rsm = rs.getMetaData();
+                int i = 0;
+                int rows = 0;
+                while (rs.next()) {
+                    if (rs.getString(descripcion).contains(des)) {
+                        rows++;
+                    }
+                }
+                data = new String[rows][4];
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (rs.getString(descripcion).contains(des)) {
+                        data[i][0] = rs.getString(codigo);
+                        data[i][1] = rs.getString(descripcion);
+                        data[i][2] = rs.getString(unidadMedida);
+                        data[i][3] = rs.getString(precioUnitario);
+                        i++;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+    public Object[][] consultaDatosCodDes(String cod, String des) {
+        Object[][] data = null;
+        try {
+            try (Connection c = cnx.obtenerConexion()) {
+                ps = c.prepareStatement(selectPro);
+                rs = ps.executeQuery();
+                rsm = rs.getMetaData();
+                int i = 0;
+                int rows = 0;
+                while (rs.next()) {
+                    if (rs.getString(codigo).contains(cod) && rs.getString(descripcion).contains(des)) {
+                        rows++;
+                    }
+                }
+                data = new String[rows][4];
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (rs.getString(codigo).contains(cod) && rs.getString(descripcion).contains(des)) {
+                        data[i][0] = rs.getString(codigo);
+                        data[i][1] = rs.getString(descripcion);
+                        data[i][2] = rs.getString(unidadMedida);
+                        data[i][3] = rs.getString(precioUnitario);
+                        i++;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+    public boolean actualizarPro(Producto producto, String cod, String des) throws SQLException {
+        boolean exito;
 
-    private static final String borrar
+        try (Connection c = cnx.obtenerConexion()) {
+            ps = c.prepareStatement(updatePro);
+            ps.clearParameters();
+            ps.setString(1, producto.getCodigo());
+            ps.setString(2, producto.getDecripcion());
+            ps.setString(3, producto.getUnidadMedida());
+            ps.setString(4, String.valueOf(producto.getPrecioUnitario()));
+            ps.setString(5, cod);
+            ps.setString(6, des);
+            exito = (ps.executeUpdate() == 1);
+        }
+
+        return exito;
+    }
+    public boolean borrarProducto(String cod, String des) throws SQLException {
+        boolean exito;
+        try (Connection c = cnx.obtenerConexion();
+                PreparedStatement stm = c.prepareStatement(deletePro)) {
+            stm.clearParameters();
+            stm.setString(1, cod);
+            stm.setString(2, des);
+            exito = (stm.executeUpdate() == 1);
+        }
+        return exito;
+    }
+    
+    // </editor-fold>    
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Atributos">   
+    private final String borrar
             = "DELETE FROM `Ferreteria`.`Empleado`\n"
             + "WHERE `idEmpleado` = ? AND `nombreEmpleado` = ?;";
 
-    private static final String update = "UPDATE `Ferreteria`.`Empleado`\n"
+    private final String update = "UPDATE `Ferreteria`.`Empleado`\n"
             + "SET\n"
             + "`idEmpleado` = ?,\n"
             + "`nombreEmpleado` = ?,\n"
@@ -228,11 +396,29 @@ public class GestorAdministracion {
             = "INSERT INTO `Empleado` "
             + "(`idEmpleado`, `nombreEmpleado`, `clave`, `rollEmpleado`) "
             + "VALUES (?, ?, ?, ?); ";
-    private static final String CMD_ACTUALIZAR
-            = "UPDATE `eif206-bd01`.`persona` SET "
-            + "`apellido`=?, `nombre`=?, `enano`=? "
-            + "WHERE `id`=? ;";
 
+    private final String agregarPro = "INSERT INTO `Ferreteria`.`ProductoCatalogo`\n"
+            + "(`idProducto`,`descripProducto`,`unidadMedida`,`precioUnitario`)"
+            + "VALUES (?,?,?,?);";
+    private final String selectPro = "SELECT `ProductoCatalogo`.`idProducto`,\n"
+            + "    `ProductoCatalogo`.`descripProducto`,\n"
+            + "    `ProductoCatalogo`.`unidadMedida`,\n"
+            + "    `ProductoCatalogo`.`precioUnitario`\n"
+            + "FROM `Ferreteria`.`ProductoCatalogo`;";
+    private final String updatePro = "UPDATE `Ferreteria`.`ProductoCatalogo`\n"
+            + "SET\n"
+            + "`idProducto` = ?,\n"
+            + "`descripProducto` = ?,\n"
+            + "`unidadMedida` = ?,\n"
+            + "`precioUnitario` = ?\n"
+            + "WHERE `idProducto` = ? AND `descripProducto` = ?;";
+    private final String deletePro = "DELETE FROM `Ferreteria`.`ProductoCatalogo`\n"
+            + "WHERE `idProducto` = ? AND `descripProducto` = ?;";
+    
+    private final String codigo = "idProducto";
+    private final String descripcion = "descripProducto";
+    private final String unidadMedida = "unidadMedida";
+    private final String precioUnitario = "precioUnitario";
     private final String id = "idEmpleado";
     private final String nombreE = "nombreEmpleado";
     private final String clave = "clave";
@@ -242,4 +428,5 @@ public class GestorAdministracion {
     private ResultSetMetaData rsm;
     private DefaultTableModel tm;
     private Conexion cnx;
+      //</editor-fold>
 }

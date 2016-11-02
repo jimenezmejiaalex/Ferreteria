@@ -8,6 +8,7 @@ package ferreteria.vista;
 import ferreteria.control.GestorPrincipal;
 import ferreteria.modelo.Empleado;
 import ferreteria.modelo.Modo;
+import ferreteria.modelo.Producto;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -117,19 +118,19 @@ public class Admistracion extends javax.swing.JFrame {
         producModifica = new javax.swing.JButton();
         producIncluir = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        lbCodigo = new javax.swing.JLabel();
+        lbdecrip = new javax.swing.JLabel();
+        lbUM = new javax.swing.JLabel();
+        lbPU = new javax.swing.JLabel();
+        pCamCod = new javax.swing.JTextField();
+        pCampDesc = new javax.swing.JTextField();
+        pCampUM = new javax.swing.JTextField();
+        pCamPUni = new javax.swing.JTextField();
+        btnpOK = new javax.swing.JButton();
+        btnPcancelar = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabladatosP = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -359,6 +360,11 @@ public class Admistracion extends javax.swing.JFrame {
         producBorrar.setMaximumSize(new java.awt.Dimension(80, 29));
         producBorrar.setMinimumSize(new java.awt.Dimension(80, 29));
         producBorrar.setPreferredSize(new java.awt.Dimension(80, 29));
+        producBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                producBorrarActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -366,6 +372,11 @@ public class Admistracion extends javax.swing.JFrame {
         jPanel5.add(producBorrar, gridBagConstraints);
 
         producConsultar.setText("Consultar");
+        producConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                producConsultarActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel5.add(producConsultar, gridBagConstraints);
@@ -375,6 +386,11 @@ public class Admistracion extends javax.swing.JFrame {
         producModifica.setMaximumSize(new java.awt.Dimension(80, 29));
         producModifica.setMinimumSize(new java.awt.Dimension(80, 29));
         producModifica.setPreferredSize(new java.awt.Dimension(80, 29));
+        producModifica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                producModificaActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -385,9 +401,16 @@ public class Admistracion extends javax.swing.JFrame {
         producIncluir.setMaximumSize(new java.awt.Dimension(80, 29));
         producIncluir.setMinimumSize(new java.awt.Dimension(80, 29));
         producIncluir.setPreferredSize(new java.awt.Dimension(80, 29));
+        producIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                producIncluirActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel5.add(producIncluir, gridBagConstraints);
 
@@ -395,47 +418,47 @@ public class Admistracion extends javax.swing.JFrame {
 
         jPanel6.setLayout(new java.awt.GridBagLayout());
 
-        jLabel5.setText("Codigo");
-        jLabel5.setEnabled(false);
-        jLabel5.setOpaque(true);
+        lbCodigo.setText("Codigo");
+        lbCodigo.setEnabled(false);
+        lbCodigo.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel6.add(jLabel5, gridBagConstraints);
+        jPanel6.add(lbCodigo, gridBagConstraints);
 
-        jLabel6.setText("Descripcion");
-        jLabel6.setEnabled(false);
-        jLabel6.setOpaque(true);
+        lbdecrip.setText("Descripcion");
+        lbdecrip.setEnabled(false);
+        lbdecrip.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel6.add(jLabel6, gridBagConstraints);
+        jPanel6.add(lbdecrip, gridBagConstraints);
 
-        jLabel7.setText("Unidad de medida");
-        jLabel7.setEnabled(false);
-        jLabel7.setOpaque(true);
+        lbUM.setText("Unidad de medida");
+        lbUM.setEnabled(false);
+        lbUM.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel6.add(jLabel7, gridBagConstraints);
+        jPanel6.add(lbUM, gridBagConstraints);
 
-        jLabel8.setText("Precio unitario");
-        jLabel8.setEnabled(false);
-        jLabel8.setOpaque(true);
+        lbPU.setText("Precio unitario");
+        lbPU.setEnabled(false);
+        lbPU.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel6.add(jLabel8, gridBagConstraints);
+        jPanel6.add(lbPU, gridBagConstraints);
 
-        jTextField5.setColumns(10);
-        jTextField5.setEnabled(false);
-        jTextField5.setFocusCycleRoot(true);
+        pCamCod.setColumns(10);
+        pCamCod.setEnabled(false);
+        pCamCod.setFocusCycleRoot(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -443,10 +466,10 @@ public class Admistracion extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel6.add(jTextField5, gridBagConstraints);
+        jPanel6.add(pCamCod, gridBagConstraints);
 
-        jTextField6.setColumns(10);
-        jTextField6.setEnabled(false);
+        pCampDesc.setColumns(10);
+        pCampDesc.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -454,10 +477,10 @@ public class Admistracion extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel6.add(jTextField6, gridBagConstraints);
+        jPanel6.add(pCampDesc, gridBagConstraints);
 
-        jTextField7.setColumns(10);
-        jTextField7.setEnabled(false);
+        pCampUM.setColumns(10);
+        pCampUM.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -465,10 +488,10 @@ public class Admistracion extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel6.add(jTextField7, gridBagConstraints);
+        jPanel6.add(pCampUM, gridBagConstraints);
 
-        jTextField8.setColumns(10);
-        jTextField8.setEnabled(false);
+        pCamPUni.setColumns(10);
+        pCamPUni.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -476,15 +499,20 @@ public class Admistracion extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel6.add(jTextField8, gridBagConstraints);
+        jPanel6.add(pCamPUni, gridBagConstraints);
 
-        jButton6.setText("OK");
-        jButton6.setAlignmentY(0.7F);
-        jButton6.setEnabled(false);
-        jButton6.setMaximumSize(new java.awt.Dimension(33, 40));
-        jButton6.setMinimumSize(new java.awt.Dimension(33, 40));
-        jButton6.setOpaque(true);
-        jButton6.setPreferredSize(new java.awt.Dimension(50, 29));
+        btnpOK.setText("OK");
+        btnpOK.setAlignmentY(0.7F);
+        btnpOK.setEnabled(false);
+        btnpOK.setMaximumSize(new java.awt.Dimension(33, 40));
+        btnpOK.setMinimumSize(new java.awt.Dimension(33, 40));
+        btnpOK.setOpaque(true);
+        btnpOK.setPreferredSize(new java.awt.Dimension(50, 29));
+        btnpOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpOKActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -493,26 +521,31 @@ public class Admistracion extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel6.add(jButton6, gridBagConstraints);
+        jPanel6.add(btnpOK, gridBagConstraints);
 
-        jButton5.setText("Cancelar");
-        jButton5.setEnabled(false);
-        jButton5.setMaximumSize(new java.awt.Dimension(80, 29));
-        jButton5.setMinimumSize(new java.awt.Dimension(80, 29));
-        jButton5.setPreferredSize(new java.awt.Dimension(80, 29));
+        btnPcancelar.setText("Cancelar");
+        btnPcancelar.setEnabled(false);
+        btnPcancelar.setMaximumSize(new java.awt.Dimension(80, 29));
+        btnPcancelar.setMinimumSize(new java.awt.Dimension(80, 29));
+        btnPcancelar.setPreferredSize(new java.awt.Dimension(80, 29));
+        btnPcancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPcancelarActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel6.add(jButton5, gridBagConstraints);
+        jPanel6.add(btnPcancelar, gridBagConstraints);
 
         jPanel1.add(jPanel6, java.awt.BorderLayout.LINE_START);
 
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabladatosP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -538,7 +571,7 @@ public class Admistracion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tabladatosP);
 
         jPanel7.add(jScrollPane2);
 
@@ -576,7 +609,7 @@ public class Admistracion extends javax.swing.JFrame {
         boolean vacios = algunCampoVacio();
         if (modo == Modo.MODO_CONSULTA) {
             // <editor-fold defaultstate="collapsed" desc="Consultar ">
-            
+
             if (campoID.getText().isEmpty()
                     && campoNombre.getText().isEmpty()) {
                 data = gestor.consultaDatosEmpleado();
@@ -652,7 +685,7 @@ public class Admistracion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(
                     null, "Se modificaron los datos correctamente",
                     "", JOptionPane.INFORMATION_MESSAGE);
-            
+
             //</editor-fold>
         }
         if (unaPersonaEncontrada() && modo == Modo.MODO_CONSULTA) {
@@ -661,7 +694,7 @@ public class Admistracion extends javax.swing.JFrame {
             btnModificar.setEnabled(true);
             return;
         }
-        
+
         desactivar();
     }//GEN-LAST:event_btnOKActionPerformed
 
@@ -746,6 +779,221 @@ public class Admistracion extends javax.swing.JFrame {
         limpiarCampos();
     }//GEN-LAST:event_btncancelarActionPerformed
 
+    private void producConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_producConsultarActionPerformed
+        modo = Modo.MODO_CONSULTA;
+        verificarModo();
+
+    }//GEN-LAST:event_producConsultarActionPerformed
+
+    private void btnpOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpOKActionPerformed
+        if (modo == Modo.MODO_CONSULTA) {
+            // <editor-fold defaultstate="collapsed" desc="Consulta">
+            if (this.pCamCod.getText().isEmpty() && this.pCampDesc.getText().isEmpty()) {
+                this.tabladatosP.setModel(gestor.consultaProducto());
+            }
+            if (!(this.pCamCod.getText().isEmpty()) && this.pCampDesc.getText().isEmpty()) {
+                this.tabladatosP.setModel(gestor.consultaProducto(pCamCod.getText()));
+            }
+            if ((this.pCamCod.getText().isEmpty()) && !(this.pCampDesc.getText().isEmpty())) {
+                this.tabladatosP.setModel(gestor.consultaProductoDes(pCampDesc.getText()));
+            }
+            if (!(this.pCamCod.getText().isEmpty()) && !(this.pCampDesc.getText().isEmpty())) {
+                this.tabladatosP.setModel(gestor.consultaProductoDesCod(pCamCod.getText(), pCampDesc.getText()));
+            }
+            if (this.tabladatosP.getRowCount() <= 0) {
+                JOptionPane.showMessageDialog(
+                        null, "No se encontro !",
+                        "", JOptionPane.INFORMATION_MESSAGE);
+            }
+            // </editor-fold>
+        }
+        if (modo == Modo.MODO_INCLUIR) {
+            // <editor-fold defaultstate="collapsed" desc="Incluir">
+            if (algunCampoVacioPro()) {
+                JOptionPane.showMessageDialog(
+                        null, "Hay campos sin rellener",
+                        "Campos vacios !", JOptionPane.WARNING_MESSAGE);
+                return;
+            } else {
+                gestor.agregaProductoCatalogo(
+                        new Producto(
+                                pCamCod.getText(),
+                                pCampDesc.getText(),
+                                pCampUM.getText(),
+                                Double.valueOf(pCamPUni.getText())));
+                limpiarCamposPro();
+                desactivarPro();
+                JOptionPane.showMessageDialog(
+                        null, "Se agregaron los datos correctamente",
+                        "", JOptionPane.INFORMATION_MESSAGE);
+            }
+            // </editor-fold>
+        }
+        if (modo == Modo.MODO_MODIFICA) {
+            // <editor-fold defaultstate="collapsed" desc="Modificar">
+            gestor.actualizaProducto(
+                    new Producto(this.pCamCod.getText(),
+                            this.pCampDesc.getText(),
+                            this.pCampUM.getText(),
+                            Double.valueOf(this.pCamPUni.getText())),
+                    codigo,
+                    descripcion);
+            this.tabladatosP.setModel(
+                    gestor.consultaProductoDesCod(
+                            this.pCamCod.getText(),
+                            this.pCampDesc.getText()));
+            limpiarCamposPro();
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Modificado con exito !",
+                    "",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            // </editor-fold>
+        }
+        if (this.tabladatosP.getRowCount() == 1 && modo != Modo.MODO_MODIFICA) {
+            activarProductoBotonesLlenarCampos();
+        } else {
+            modo = Modo.MODO_INICIO;
+            verificarModo();
+        }
+    }//GEN-LAST:event_btnpOKActionPerformed
+
+    private void activarProductoBotonesLlenarCampos() {
+        desactivarPro();
+        this.producModifica.setEnabled(true);
+        this.producBorrar.setEnabled(true);
+        this.producConsultar.setEnabled(false);
+        this.producIncluir.setEnabled(false);
+        this.btnpOK.setEnabled(false);
+        this.btnPcancelar.setEnabled(true);
+        this.pCamCod.setText(String.valueOf(tabladatosP.getValueAt(0, 0)));
+        this.pCampDesc.setText(String.valueOf(tabladatosP.getValueAt(0, 1)));
+        this.pCampUM.setText(String.valueOf(tabladatosP.getValueAt(0, 2)));
+        this.pCamPUni.setText(String.valueOf(tabladatosP.getValueAt(0, 3)));
+    }
+
+    private void limpiarCamposPro() {
+        pCamCod.setText("");
+        pCampDesc.setText("");
+        pCampUM.setText("");
+        pCamPUni.setText("");
+    }
+
+    private void desactivarPro() {
+        this.lbCodigo.setEnabled(false);
+        this.lbdecrip.setEnabled(false);
+        this.pCamCod.setEnabled(false);
+        this.pCampDesc.setEnabled(false);
+        this.btnPcancelar.setEnabled(false);
+        this.btnpOK.setEnabled(false);
+        this.lbUM.setEnabled(false);
+        this.lbPU.setEnabled(false);
+        this.pCamPUni.setEnabled(false);
+        this.pCampUM.setEnabled(false);
+    }
+
+    private boolean algunCampoVacioPro() {
+        return this.pCamCod.getText().isEmpty()
+                || this.pCamPUni.getText().isEmpty()
+                || this.pCampDesc.getText().isEmpty()
+                || this.pCampUM.getText().isEmpty();
+    }
+
+    private void producIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_producIncluirActionPerformed
+        modo = Modo.MODO_INCLUIR;
+        verificarModo();
+    }//GEN-LAST:event_producIncluirActionPerformed
+
+    private void producBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_producBorrarActionPerformed
+        modo = Modo.MODO_BORRAR;
+        verificarModo();
+        gestor.borrarProducto(this.pCamCod.getText(), this.pCampDesc.getText());
+        this.tabladatosP.setModel(gestor.consultaProducto(pCamCod.getText()));
+        limpiarCamposPro();
+        JOptionPane.showMessageDialog(
+                null,
+                "Borrado con exito !",
+                "",
+                JOptionPane.INFORMATION_MESSAGE);
+        modo= Modo.MODO_INICIO;
+        verificarModo();
+    }//GEN-LAST:event_producBorrarActionPerformed
+
+    private void producModificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_producModificaActionPerformed
+        modo = Modo.MODO_MODIFICA;
+        verificarModo();
+        this.activarModifica();
+        codigo = this.pCamCod.getText();
+        descripcion = this.pCampDesc.getText();
+    }//GEN-LAST:event_producModificaActionPerformed
+
+    private void btnPcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPcancelarActionPerformed
+        limpiarCamposPro();
+        modo = Modo.MODO_INICIO;
+        verificarModo();
+    }//GEN-LAST:event_btnPcancelarActionPerformed
+
+    private void modoInicial() {
+        this.producModifica.setEnabled(false);
+        this.producBorrar.setEnabled(false);
+        this.producConsultar.setEnabled(true);
+        this.producIncluir.setEnabled(true);
+    }
+
+    private void desActivarBotonesDerechaPro() {
+        this.producModifica.setEnabled(false);
+        this.producBorrar.setEnabled(false);
+        this.producConsultar.setEnabled(false);
+        this.producIncluir.setEnabled(false);
+    }
+
+    private void activarModifica() {
+        desActivarBotonesDerechaPro();
+        this.lbCodigo.setEnabled(true);
+        this.lbdecrip.setEnabled(true);
+        this.pCamCod.setEnabled(true);
+        this.pCampDesc.setEnabled(true);
+        this.btnPcancelar.setEnabled(true);
+        this.btnpOK.setEnabled(true);
+        this.lbUM.setEnabled(true);
+        this.lbPU.setEnabled(true);
+        this.pCamPUni.setEnabled(true);
+        this.pCampUM.setEnabled(true);
+    }
+
+    private void verificarModo() {
+        if (modo == Modo.MODO_CONSULTA) {
+            this.producConsultar.setEnabled(false);
+            this.producIncluir.setEnabled(false);
+            this.lbCodigo.setEnabled(true);
+            this.lbdecrip.setEnabled(true);
+            this.pCamCod.setEnabled(true);
+            this.pCampDesc.setEnabled(true);
+            this.btnPcancelar.setEnabled(true);
+            this.btnpOK.setEnabled(true);
+        }
+        if (modo == Modo.MODO_INCLUIR) {
+            this.producConsultar.setEnabled(false);
+            this.producIncluir.setEnabled(false);
+            this.lbCodigo.setEnabled(true);
+            this.lbdecrip.setEnabled(true);
+            this.pCamCod.setEnabled(true);
+            this.pCampDesc.setEnabled(true);
+            this.btnPcancelar.setEnabled(true);
+            this.btnpOK.setEnabled(true);
+            this.lbUM.setEnabled(true);
+            this.lbPU.setEnabled(true);
+            this.pCamPUni.setEnabled(true);
+            this.pCampUM.setEnabled(true);
+        }
+        if (modo == Modo.MODO_INICIO) {
+            this.desactivarPro();
+            this.modoInicial();
+            this.btnPcancelar.setEnabled(false);
+        }
+    }
+
     public Modo getModo() {
         return modo;
     }
@@ -757,17 +1005,13 @@ public class Admistracion extends javax.swing.JFrame {
     private javax.swing.JButton btnIncluir;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnOK;
+    private javax.swing.JButton btnPcancelar;
     private javax.swing.JButton btncancelar;
+    private javax.swing.JButton btnpOK;
     private javax.swing.JTextField campoID;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JPasswordField campoPassword;
     private javax.swing.JComboBox<String> campoRol;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -781,21 +1025,27 @@ public class Admistracion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JLabel lbCodigo;
     private javax.swing.JLabel lbID;
     private javax.swing.JLabel lbNombre;
+    private javax.swing.JLabel lbPU;
     private javax.swing.JLabel lbRol;
+    private javax.swing.JLabel lbUM;
+    private javax.swing.JLabel lbdecrip;
+    private javax.swing.JTextField pCamCod;
+    private javax.swing.JTextField pCamPUni;
+    private javax.swing.JTextField pCampDesc;
+    private javax.swing.JTextField pCampUM;
     private javax.swing.JButton producBorrar;
     private javax.swing.JButton producConsultar;
     private javax.swing.JButton producIncluir;
     private javax.swing.JButton producModifica;
     private javax.swing.JTable tablaDatos;
+    private javax.swing.JTable tabladatosP;
     // End of variables declaration//GEN-END:variables
 
+    private String codigo;
+    private String descripcion;
     private String ID;
     private String NOM;
     private Object[][] data;
