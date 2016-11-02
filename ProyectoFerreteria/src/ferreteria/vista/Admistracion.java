@@ -112,11 +112,10 @@ public class Admistracion extends javax.swing.JFrame {
         campoPassword = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        producBorrar = new javax.swing.JButton();
+        producConsultar = new javax.swing.JButton();
+        producModifica = new javax.swing.JButton();
+        producIncluir = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -127,6 +126,7 @@ public class Admistracion extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -354,52 +354,58 @@ public class Admistracion extends javax.swing.JFrame {
 
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
-        jButton2.setText("jButton2");
+        producBorrar.setText("Borrar");
+        producBorrar.setEnabled(false);
+        producBorrar.setMaximumSize(new java.awt.Dimension(80, 29));
+        producBorrar.setMinimumSize(new java.awt.Dimension(80, 29));
+        producBorrar.setPreferredSize(new java.awt.Dimension(80, 29));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel5.add(jButton2, gridBagConstraints);
+        jPanel5.add(producBorrar, gridBagConstraints);
 
-        jButton1.setText("jButton1");
+        producConsultar.setText("Consultar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel5.add(jButton1, gridBagConstraints);
+        jPanel5.add(producConsultar, gridBagConstraints);
 
-        jButton3.setText("jButton3");
+        producModifica.setText("Modificar");
+        producModifica.setEnabled(false);
+        producModifica.setMaximumSize(new java.awt.Dimension(80, 29));
+        producModifica.setMinimumSize(new java.awt.Dimension(80, 29));
+        producModifica.setPreferredSize(new java.awt.Dimension(80, 29));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel5.add(jButton3, gridBagConstraints);
+        jPanel5.add(producModifica, gridBagConstraints);
 
-        jButton4.setText("jButton4");
+        producIncluir.setText("Incluir");
+        producIncluir.setMaximumSize(new java.awt.Dimension(80, 29));
+        producIncluir.setMinimumSize(new java.awt.Dimension(80, 29));
+        producIncluir.setPreferredSize(new java.awt.Dimension(80, 29));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel5.add(jButton4, gridBagConstraints);
-
-        jButton5.setText("jButton5");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
-        gridBagConstraints.weighty = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel5.add(jButton5, gridBagConstraints);
+        jPanel5.add(producIncluir, gridBagConstraints);
 
         jPanel1.add(jPanel5, java.awt.BorderLayout.LINE_END);
 
         jPanel6.setLayout(new java.awt.GridBagLayout());
 
         jLabel5.setText("Codigo");
+        jLabel5.setEnabled(false);
+        jLabel5.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel6.add(jLabel5, gridBagConstraints);
 
         jLabel6.setText("Descripcion");
+        jLabel6.setEnabled(false);
+        jLabel6.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -408,6 +414,8 @@ public class Admistracion extends javax.swing.JFrame {
         jPanel6.add(jLabel6, gridBagConstraints);
 
         jLabel7.setText("Unidad de medida");
+        jLabel7.setEnabled(false);
+        jLabel7.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -416,6 +424,8 @@ public class Admistracion extends javax.swing.JFrame {
         jPanel6.add(jLabel7, gridBagConstraints);
 
         jLabel8.setText("Precio unitario");
+        jLabel8.setEnabled(false);
+        jLabel8.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -424,40 +434,45 @@ public class Admistracion extends javax.swing.JFrame {
         jPanel6.add(jLabel8, gridBagConstraints);
 
         jTextField5.setColumns(10);
+        jTextField5.setEnabled(false);
+        jTextField5.setFocusCycleRoot(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel6.add(jTextField5, gridBagConstraints);
 
         jTextField6.setColumns(10);
+        jTextField6.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel6.add(jTextField6, gridBagConstraints);
 
         jTextField7.setColumns(10);
+        jTextField7.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel6.add(jTextField7, gridBagConstraints);
 
         jTextField8.setColumns(10);
+        jTextField8.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
@@ -465,8 +480,10 @@ public class Admistracion extends javax.swing.JFrame {
 
         jButton6.setText("OK");
         jButton6.setAlignmentY(0.7F);
+        jButton6.setEnabled(false);
         jButton6.setMaximumSize(new java.awt.Dimension(33, 40));
         jButton6.setMinimumSize(new java.awt.Dimension(33, 40));
+        jButton6.setOpaque(true);
         jButton6.setPreferredSize(new java.awt.Dimension(50, 29));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -477,6 +494,19 @@ public class Admistracion extends javax.swing.JFrame {
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel6.add(jButton6, gridBagConstraints);
+
+        jButton5.setText("Cancelar");
+        jButton5.setEnabled(false);
+        jButton5.setMaximumSize(new java.awt.Dimension(80, 29));
+        jButton5.setMinimumSize(new java.awt.Dimension(80, 29));
+        jButton5.setPreferredSize(new java.awt.Dimension(80, 29));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(jButton5, gridBagConstraints);
 
         jPanel1.add(jPanel6, java.awt.BorderLayout.LINE_START);
 
@@ -546,6 +576,7 @@ public class Admistracion extends javax.swing.JFrame {
         boolean vacios = algunCampoVacio();
         if (modo == Modo.MODO_CONSULTA) {
             // <editor-fold defaultstate="collapsed" desc="Consultar ">
+            
             if (campoID.getText().isEmpty()
                     && campoNombre.getText().isEmpty()) {
                 data = gestor.consultaDatosEmpleado();
@@ -731,10 +762,6 @@ public class Admistracion extends javax.swing.JFrame {
     private javax.swing.JTextField campoNombre;
     private javax.swing.JPasswordField campoPassword;
     private javax.swing.JComboBox<String> campoRol;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel5;
@@ -762,8 +789,13 @@ public class Admistracion extends javax.swing.JFrame {
     private javax.swing.JLabel lbID;
     private javax.swing.JLabel lbNombre;
     private javax.swing.JLabel lbRol;
+    private javax.swing.JButton producBorrar;
+    private javax.swing.JButton producConsultar;
+    private javax.swing.JButton producIncluir;
+    private javax.swing.JButton producModifica;
     private javax.swing.JTable tablaDatos;
     // End of variables declaration//GEN-END:variables
+
     private String ID;
     private String NOM;
     private Object[][] data;
