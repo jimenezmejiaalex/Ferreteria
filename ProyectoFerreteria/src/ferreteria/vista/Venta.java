@@ -7,12 +7,7 @@ package ferreteria.vista;
 
 import ferreteria.control.GestorPrincipal;
 import ferreteria.modelo.Modo;
-import javax.swing.table.TableModel;
 
-/**
- *
- * @author aleex
- */
 public class Venta extends javax.swing.JFrame{
     public Venta(GestorPrincipal gestor) {
         super("Ventas");
@@ -121,7 +116,7 @@ public class Venta extends javax.swing.JFrame{
         btnCancelarFac.setEnabled(false);
     }
     private void agregandoProductos(){
-          lbCliente.setEnabled(false);
+        lbCliente.setEnabled(false);
         lbVendedor.setEnabled(false);
         lbDetalle.setEnabled(false);
         campoCliente.setEnabled(false);
@@ -137,6 +132,13 @@ public class Venta extends javax.swing.JFrame{
         campoCantidad.setEnabled(false);
         btnBuscar.setEnabled(true);
         btnCancelarFac.setEnabled(true);
+    }
+    private void limpiarCampos(){
+        campoCliente.setText("");
+        campoVendedor.setText("");
+        campoDetalle.setText("");
+        campoCodigo.setText("");
+        campoCantidad.setText("");
     }
 
     /**
@@ -592,6 +594,11 @@ public class Venta extends javax.swing.JFrame{
         jPanel9.add(campoCantidad, gridBagConstraints);
 
         btnCancelarFac.setText("Cancelar");
+        btnCancelarFac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarFacActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -682,6 +689,11 @@ public class Venta extends javax.swing.JFrame{
             tablaClientes.setModel(gestor.datosCliente());
         }
     }//GEN-LAST:event_btnOKActionPerformed
+
+    private void btnCancelarFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarFacActionPerformed
+        limpiarCampos();
+        inicioFacturar();
+    }//GEN-LAST:event_btnCancelarFacActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaFactura;
