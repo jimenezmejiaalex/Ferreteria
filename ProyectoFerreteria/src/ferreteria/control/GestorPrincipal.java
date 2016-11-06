@@ -18,6 +18,7 @@ public class GestorPrincipal {
         try {
             gestorDespa= new GestorDespachador(); 
             gestorAdmi = new GestorAdministracion();
+            gestorVenta = new GestorVentas();
         } catch (ClassNotFoundException e) {
             System.err.println(e.getMessage());
         }
@@ -125,7 +126,11 @@ public class GestorPrincipal {
         return exito;
     }
 
+    public DefaultTableModel datosCliente(){
+        return gestorVenta.consultar();
+    }
     // </editor-fold>
+    private GestorVentas gestorVenta;
     private GestorDespachador gestorDespa;
     private GestorAdministracion gestorAdmi;
     private Conexion cnx;

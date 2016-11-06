@@ -5,17 +5,138 @@
  */
 package ferreteria.vista;
 
+import ferreteria.control.GestorPrincipal;
+import ferreteria.modelo.Modo;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author aleex
  */
-public class Venta extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Venta
-     */
-    public Venta() {
+public class Venta extends javax.swing.JFrame{
+    public Venta(GestorPrincipal gestor) {
+        super("Ventas");
+        this.gestor = gestor;
         initComponents();
+        config();
+    }
+    private void config() {
+        setLocationRelativeTo(null);
+        inicio();
+        inicioFacturar();
+    }
+
+    public void init() {
+        setVisible(true);
+    }
+    
+    private void inicio(){
+        lbNombre.setEnabled(false);
+        lbID.setEnabled(false);
+        lbEmail.setEnabled(false);
+        lbDescuento.setEnabled(false);
+        lbTel.setEnabled(false);
+        campoNombre.setEnabled(false);
+        campoID.setEnabled(false);
+        campoEmail.setEnabled(false);
+        boxDescuento.setEnabled(false);
+        campoTelefono.setEnabled(false);
+        btnOK.setEnabled(false);
+        btnCancel.setEnabled(false);
+        btnBorrar.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnConsultar.setEnabled(true);
+        btnIncluir.setEnabled(true);
+    }
+    private void consulta(){
+        lbNombre.setEnabled(true);
+        lbID.setEnabled(true);
+        lbEmail.setEnabled(false);
+        lbDescuento.setEnabled(false);
+        lbTel.setEnabled(false);
+        campoNombre.setEnabled(true);
+        campoID.setEnabled(true);
+        campoEmail.setEnabled(false);
+        boxDescuento.setEnabled(false);
+        campoTelefono.setEnabled(false);
+        btnOK.setEnabled(true);
+        btnCancel.setEnabled(true);
+        btnBorrar.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnConsultar.setEnabled(false);
+        btnIncluir.setEnabled(false);
+    }
+    private void modifica(){
+        lbNombre.setEnabled(true);
+        lbID.setEnabled(true);
+        lbEmail.setEnabled(true);
+        lbDescuento.setEnabled(true);
+        lbTel.setEnabled(true);
+        campoNombre.setEnabled(true);
+        campoID.setEnabled(true);
+        campoEmail.setEnabled(true);
+        boxDescuento.setEnabled(true);
+        campoTelefono.setEnabled(true);
+        btnOK.setEnabled(true);
+        btnCancel.setEnabled(true);
+        btnBorrar.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnConsultar.setEnabled(false);
+        btnIncluir.setEnabled(false);
+    }
+    private void incluye(){
+        lbNombre.setEnabled(true);
+        lbID.setEnabled(true);
+        lbEmail.setEnabled(true);
+        lbDescuento.setEnabled(true);
+        lbTel.setEnabled(true);
+        campoNombre.setEnabled(true);
+        campoID.setEnabled(true);
+        campoEmail.setEnabled(true);
+        boxDescuento.setEnabled(true);
+        campoTelefono.setEnabled(true);
+        btnOK.setEnabled(true);
+        btnCancel.setEnabled(true);
+        btnBorrar.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnConsultar.setEnabled(false);
+        btnIncluir.setEnabled(false);
+    }
+    private void inicioFacturar(){
+        lbCliente.setEnabled(true);
+        lbVendedor.setEnabled(true);
+        lbDetalle.setEnabled(true);
+        campoCliente.setEnabled(true);
+        campoVendedor.setEnabled(true);
+        campoDetalle.setEnabled(true);
+        btnAgregaPro.setEnabled(true);
+        btnFacturar.setEnabled(false);
+        btnAgregar.setEnabled(false);
+        tablaProductos.setEnabled(false);
+        lbCodigo.setEnabled(false);
+        lbCantidad.setEnabled(false);
+        campoCodigo.setEnabled(false);
+        campoCantidad.setEnabled(false);
+        btnBuscar.setEnabled(false);
+        btnCancelarFac.setEnabled(false);
+    }
+    private void agregandoProductos(){
+          lbCliente.setEnabled(false);
+        lbVendedor.setEnabled(false);
+        lbDetalle.setEnabled(false);
+        campoCliente.setEnabled(false);
+        campoVendedor.setEnabled(false);
+        campoDetalle.setEnabled(false);
+        btnAgregaPro.setEnabled(false);
+        btnFacturar.setEnabled(false);
+        btnAgregar.setEnabled(false);
+        tablaProductos.setEnabled(true);
+        lbCodigo.setEnabled(true);
+        lbCantidad.setEnabled(false);
+        campoCodigo.setEnabled(true);
+        campoCantidad.setEnabled(false);
+        btnBuscar.setEnabled(true);
+        btnCancelarFac.setEnabled(true);
     }
 
     /**
@@ -26,25 +147,595 @@ public class Venta extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        lbNombre = new javax.swing.JLabel();
+        campoNombre = new javax.swing.JTextField();
+        lbID = new javax.swing.JLabel();
+        campoID = new javax.swing.JTextField();
+        lbTel = new javax.swing.JLabel();
+        lbEmail = new javax.swing.JLabel();
+        lbDescuento = new javax.swing.JLabel();
+        campoTelefono = new javax.swing.JTextField();
+        campoEmail = new javax.swing.JTextField();
+        btnOK = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        boxDescuento = new javax.swing.JComboBox<>();
+        jPanel4 = new javax.swing.JPanel();
+        btnConsultar = new javax.swing.JButton();
+        btnIncluir = new javax.swing.JButton();
+        btnBorrar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaClientes = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        btnAgregaPro = new javax.swing.JButton();
+        lbCliente = new javax.swing.JLabel();
+        lbVendedor = new javax.swing.JLabel();
+        lbDetalle = new javax.swing.JLabel();
+        campoCliente = new javax.swing.JTextField();
+        campoVendedor = new javax.swing.JTextField();
+        campoDetalle = new javax.swing.JTextField();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaProductos = new javax.swing.JTable();
+        btnAgregar = new javax.swing.JButton();
+        lbCodigo = new javax.swing.JLabel();
+        campoCodigo = new javax.swing.JTextField();
+        btnFacturar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        lbCantidad = new javax.swing.JLabel();
+        campoCantidad = new javax.swing.JTextField();
+        btnCancelarFac = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        areaFactura = new javax.swing.JTextArea();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        lbNombre.setText("Nombre");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(lbNombre, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(campoNombre, gridBagConstraints);
+
+        lbID.setText("ID");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(lbID, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(campoID, gridBagConstraints);
+
+        lbTel.setText("Telefono");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(lbTel, gridBagConstraints);
+
+        lbEmail.setText("Email");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(lbEmail, gridBagConstraints);
+
+        lbDescuento.setText("Descuento");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(lbDescuento, gridBagConstraints);
+
+        campoTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoTelefonoActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(campoTelefono, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(campoEmail, gridBagConstraints);
+
+        btnOK.setText("OK");
+        btnOK.setPreferredSize(new java.awt.Dimension(74, 29));
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOKActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(btnOK, gridBagConstraints);
+
+        btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(btnCancel, gridBagConstraints);
+
+        boxDescuento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5%", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%", "50%", "55%", "60%", "65%", "70%", "75%", "80%" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        jPanel3.add(boxDescuento, gridBagConstraints);
+
+        jPanel1.add(jPanel3, java.awt.BorderLayout.LINE_START);
+
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel4.add(btnConsultar, gridBagConstraints);
+
+        btnIncluir.setText("Incluir");
+        btnIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncluirActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel4.add(btnIncluir, gridBagConstraints);
+
+        btnBorrar.setText("Borrar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel4.add(btnBorrar, gridBagConstraints);
+
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel4.add(btnModificar, gridBagConstraints);
+
+        jPanel1.add(jPanel4, java.awt.BorderLayout.LINE_END);
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Telefono", "Email", "Descuento"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaClientes.setRowSelectionAllowed(false);
+        tablaClientes.setShowVerticalLines(false);
+        jScrollPane1.setViewportView(tablaClientes);
+
+        jPanel5.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jPanel5, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane1.addTab("Cliente", jPanel1);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel6.setLayout(new java.awt.GridBagLayout());
+
+        btnAgregaPro.setText("Agregar Productos");
+        btnAgregaPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregaProActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(btnAgregaPro, gridBagConstraints);
+
+        lbCliente.setText("Cliente");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(lbCliente, gridBagConstraints);
+
+        lbVendedor.setText("Vendedor");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(lbVendedor, gridBagConstraints);
+
+        lbDetalle.setText("Detalle");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(lbDetalle, gridBagConstraints);
+
+        campoCliente.setColumns(10);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(campoCliente, gridBagConstraints);
+
+        campoVendedor.setColumns(10);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(campoVendedor, gridBagConstraints);
+
+        campoDetalle.setColumns(10);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(campoDetalle, gridBagConstraints);
+
+        jPanel9.setLayout(new java.awt.GridBagLayout());
+
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Descripcion", "Medida", "Precio unitario"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tablaProductos);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel9.add(jScrollPane3, gridBagConstraints);
+
+        btnAgregar.setText("Agregar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel9.add(btnAgregar, gridBagConstraints);
+
+        lbCodigo.setText("Codigo");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel9.add(lbCodigo, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel9.add(campoCodigo, gridBagConstraints);
+
+        btnFacturar.setText("Facturar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        jPanel9.add(btnFacturar, gridBagConstraints);
+
+        btnBuscar.setText("Buscar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel9.add(btnBuscar, gridBagConstraints);
+
+        lbCantidad.setText("Cantidad");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel9.add(lbCantidad, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel9.add(campoCantidad, gridBagConstraints);
+
+        btnCancelarFac.setText("Cancelar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel9.add(btnCancelarFac, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(jPanel9, gridBagConstraints);
+
+        jPanel2.add(jPanel6, java.awt.BorderLayout.LINE_START);
+
+        jPanel8.setLayout(new java.awt.BorderLayout());
+
+        areaFactura.setEditable(false);
+        areaFactura.setColumns(20);
+        areaFactura.setRows(5);
+        jScrollPane2.setViewportView(areaFactura);
+
+        jPanel8.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel8, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane1.addTab("Facturar", jPanel2);
+
+        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        jTabbedPane1.getAccessibleContext().setAccessibleName("");
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Help");
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("About");
+        jMenuBar1.add(jMenu4);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void campoTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoTelefonoActionPerformed
 
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        // TODO add your handling code here:
+        modo = Modo.MODO_CONSULTA;
+        consulta();
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
+        // TODO add your handling code here:
+        modo = Modo.MODO_INCLUIR;
+        incluye();
+    }//GEN-LAST:event_btnIncluirActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+        modo = Modo.MODO_MODIFICA;
+        modifica();
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        modo = Modo.MODO_INICIO;
+        inicio();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnAgregaProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregaProActionPerformed
+        // TODO add your handling code here:
+        agregandoProductos();
+    }//GEN-LAST:event_btnAgregaProActionPerformed
+
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+        if(modo == Modo.MODO_CONSULTA){
+            tablaClientes.setModel(gestor.datosCliente());
+        }
+    }//GEN-LAST:event_btnOKActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaFactura;
+    private javax.swing.JComboBox<String> boxDescuento;
+    private javax.swing.JButton btnAgregaPro;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnCancelarFac;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnFacturar;
+    private javax.swing.JButton btnIncluir;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnOK;
+    private javax.swing.JTextField campoCantidad;
+    private javax.swing.JTextField campoCliente;
+    private javax.swing.JTextField campoCodigo;
+    private javax.swing.JTextField campoDetalle;
+    private javax.swing.JTextField campoEmail;
+    private javax.swing.JTextField campoID;
+    private javax.swing.JTextField campoNombre;
+    private javax.swing.JTextField campoTelefono;
+    private javax.swing.JTextField campoVendedor;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lbCantidad;
+    private javax.swing.JLabel lbCliente;
+    private javax.swing.JLabel lbCodigo;
+    private javax.swing.JLabel lbDescuento;
+    private javax.swing.JLabel lbDetalle;
+    private javax.swing.JLabel lbEmail;
+    private javax.swing.JLabel lbID;
+    private javax.swing.JLabel lbNombre;
+    private javax.swing.JLabel lbTel;
+    private javax.swing.JLabel lbVendedor;
+    private javax.swing.JTable tablaClientes;
+    private javax.swing.JTable tablaProductos;
     // End of variables declaration//GEN-END:variables
+    private final GestorPrincipal gestor;
+    private Modo modo = Modo.MODO_INICIO;
 }

@@ -209,7 +209,7 @@ public class GestorAdministracion {
     // </editor-fold>
     
         // <editor-fold defaultstate="collapsed" desc="Producto">
-        public boolean agregarDatosProducto(Producto pro) throws SQLException {
+    public boolean agregarDatosProducto(Producto pro) throws SQLException {
         boolean exito = false;
         try (Connection c = cnx.obtenerConexion()) {
             ps = c.prepareStatement(agregarPro);

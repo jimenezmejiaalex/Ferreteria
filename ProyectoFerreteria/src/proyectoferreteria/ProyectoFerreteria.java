@@ -2,8 +2,8 @@ package proyectoferreteria;
 
 import ferreteria.control.GestorPrincipal;
 import ferreteria.modelo.conexion.Conexion;
-import ferreteria.vista.Admistracion;
 import ferreteria.vista.Login;
+import ferreteria.vista.Venta;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -27,8 +27,10 @@ public class ProyectoFerreteria {
             GestorPrincipal gestor = new GestorPrincipal();
 //        Login login = new Login(gestor);
 //        login.init();
-            Admistracion ad = new Admistracion(gestor);
-            ad.init();
+//            Admistracion ad = new Admistracion(gestor);
+//            ad.init();
+                Venta ven = new Venta(gestor);
+                ven.init();
             try {
                 Conexion cnx = Conexion.obtenerInstancia();
             } catch (ClassNotFoundException ex) {
